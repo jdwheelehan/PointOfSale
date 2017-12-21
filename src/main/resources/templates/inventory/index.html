@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Qty</th>
+
+    </tr>
+
+    <tr th:each="item : ${items}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.quantity}"></td>
+
+    </tr>
+
+</table>
+
+
+    <a href="/inventory/addstock">Recieve</a>
+</body>
+</html>
