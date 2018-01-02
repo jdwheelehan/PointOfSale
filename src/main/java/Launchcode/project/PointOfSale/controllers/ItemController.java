@@ -33,9 +33,10 @@ public class ItemController {
     }
 
     @RequestMapping(value = "addstock", method = RequestMethod.POST)
-    public String processRecievinForm(@RequestParam Long sku, @RequestParam String name, @RequestParam Integer qty , Model model){
+    public String processRecievinForm(@RequestParam Long sku, @RequestParam String name, @RequestParam Integer qty ,
+                                      @RequestParam Double price,  Model model){
 
-        Item newItem = new Item(sku, name, qty);
+        Item newItem = new Item(sku, name, qty, price);
         itemDao.save(newItem);
 
 

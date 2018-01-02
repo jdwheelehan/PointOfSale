@@ -10,7 +10,7 @@ public class Item {
 
     @Id
     @NotNull
-    private Long Sku;
+    private Long sku;
 
     @NotNull
     @Size(max=35)
@@ -19,21 +19,25 @@ public class Item {
     @NotNull
     private Integer quantity;
 
+    @NotNull
+    private Double price;
+
     public Item() {
     }
 
-    public Item(Long sku, String name, Integer quantity) {
-        Sku = sku;
+    public Item(Long sku, String name, Integer quantity, Double price) {
+        this.sku = sku;
         this.name = name;
         this.quantity = quantity;
+        this.price = price;
     }
 
     public Long getSku() {
-        return Sku;
+        return sku;
     }
 
     public void setSku(Long sku) {
-        Sku = sku;
+        this.sku = sku;
     }
 
     public String getName() {
@@ -50,5 +54,13 @@ public class Item {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
