@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("inventory")
 public class ItemController {
@@ -33,14 +36,22 @@ public class ItemController {
     }
 
     @RequestMapping(value = "addstock", method = RequestMethod.POST)
-    public String processRecievinForm(@RequestParam Long sku, @RequestParam String name, @RequestParam Integer qty ,
+    public String processRecievinForm(@RequestParam Integer sku, @RequestParam String name, @RequestParam Integer qty ,
                                       @RequestParam Double price,  Model model){
 
+        if (itemDao.exists(sku)){
+            Item newItem = itemDao.findOne(sku);
+            newItem.setQuantity(newItem.getQuantity()+qty);
+            itemDao.save(newItem);
+        }else{
+
         Item newItem = new Item(sku, name, qty, price);
-        itemDao.save(newItem);
+        itemDao.save(newItem);}
 
 
 
         return "redirect:";
     }
+
+
 }

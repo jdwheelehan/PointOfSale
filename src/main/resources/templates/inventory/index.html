@@ -8,6 +8,7 @@
 <table class="table">
 
     <tr>
+        <th>Sku</th>
         <th>Name</th>
         <th>Qty</th>
         <th>Price</th>
@@ -15,6 +16,7 @@
     </tr>
 
     <tr th:each="item : ${items}">
+        <td th:text="${item.sku}"></td>
         <td th:text="${item.name}"></td>
         <td th:text="${item.quantity}"></td>
         <td th:text="'$'+${item.price}"></td>
