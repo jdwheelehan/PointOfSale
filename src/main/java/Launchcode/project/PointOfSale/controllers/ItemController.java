@@ -29,28 +29,49 @@ public class ItemController {
         return "inventory/index";
     }
 
-    @RequestMapping(value = "addstock", method = RequestMethod.GET)
+    @RequestMapping(value = "receiving", method = RequestMethod.GET)
     public String displayRecievingForm(Model model){
+        model.addAttribute("title", "Receiving");
+        model.addAttribute("items", itemDao.findAll());
+        return "inventory/receiving";
+    }
+
+    @RequestMapping(value = "receiving", method = RequestMethod.POST)
+    public String processRecievinForm(@RequestParam Integer sku, @RequestParam Integer qty,  Model model){
+
+        if (itemDao.exists(sku)){
+            Item newItem = itemDao.findOne(sku);
+            newItem.setQuantity(newItem.getQuantity()+ qty);
+            itemDao.save(newItem);
+            return "redirect:receiving";
+        }else{
+
+            return "redirect:addstock";}
+
+
+
+
+    }
+
+
+    @RequestMapping(value = "addstock", method = RequestMethod.GET)
+    public String displayNewStockForm(Model model){
         model.addAttribute("title", "Add Stock");
         return "inventory/addstock";
     }
 
     @RequestMapping(value = "addstock", method = RequestMethod.POST)
-    public String processRecievinForm(@RequestParam Integer sku, @RequestParam String name, @RequestParam Integer qty ,
+    public String processNewStockForm(@RequestParam Integer sku, @RequestParam String name, @RequestParam Integer qty ,
                                       @RequestParam Double price,  Model model){
 
-        if (itemDao.exists(sku)){
-            Item newItem = itemDao.findOne(sku);
-            newItem.setQuantity(newItem.getQuantity()+qty);
-            itemDao.save(newItem);
-        }else{
+
 
         Item newItem = new Item(sku, name, qty, price);
-        itemDao.save(newItem);}
+        itemDao.save(newItem);
 
 
 
-        return "redirect:";
+        return "redirect:receiving";
     }
 
 
