@@ -30,14 +30,14 @@ public class ItemController {
     }
 
     @RequestMapping(value = "receiving", method = RequestMethod.GET)
-    public String displayRecievingForm(Model model){
+    public String displayReceivingForm(Model model){
         model.addAttribute("title", "Receiving");
         model.addAttribute("items", itemDao.findAll());
         return "inventory/receiving";
     }
 
     @RequestMapping(value = "receiving", method = RequestMethod.POST)
-    public String processRecievinForm(@RequestParam Integer sku, @RequestParam Integer qty,  Model model){
+    public String processReceivingForm(@RequestParam Integer sku, @RequestParam Integer qty,  Model model){
 
         if (itemDao.exists(sku)){
             Item newItem = itemDao.findOne(sku);

@@ -10,8 +10,14 @@
         <label th:for="sku">Sku</label>
         <input class="form-control" th:name="sku" />
     </div>
+    <input type="submit" value="Add to transaction" />
 </form>
 
-
+<ul th:each="item : ${items}">
+    <li th:text="${item.name}+'     $'+${item.price}"></li>
+</ul>
+<p th:text="'Subtotal: $'+${subtotal}"></p>
+<p th:text="'Tax: $'+${tax}"></p>
+<p th:text="'Total: $'+${total}"></p>
 </body>
 </html>
