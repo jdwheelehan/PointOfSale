@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<form method="post" style="max-width:600px;" >
+    <div class="form-group">
+        <label th:for="sku">Sku</label>
+        <input class="form-control" th:name="sku" />
+    </div>
+</form>
+
+
+</body>
+</html>
