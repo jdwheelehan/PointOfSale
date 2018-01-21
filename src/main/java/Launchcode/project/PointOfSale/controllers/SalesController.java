@@ -32,7 +32,7 @@ public class SalesController {
         double total = subtotal+(subtotal*tax);
         model.addAttribute("title", "sales");
         model.addAttribute("items", items);
-        model.addAttribute("subtotal", subtotal);
+        model.addAttribute("subtotal", df.format(subtotal));
         model.addAttribute("tax", df.format(subtotal*tax));
         model.addAttribute("total", df.format(total));
 
@@ -51,7 +51,7 @@ public class SalesController {
             return "redirect:sales";
         } else {
 
-            return "redirect:sales";
+            return "redirect:";
         }
     }
 

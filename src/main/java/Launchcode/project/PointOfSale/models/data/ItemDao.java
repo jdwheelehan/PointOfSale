@@ -11,4 +11,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface ItemDao extends CrudRepository<Item, Integer>{
 
+
+
 }

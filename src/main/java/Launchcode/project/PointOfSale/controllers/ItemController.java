@@ -23,7 +23,7 @@ public class ItemController {
     @RequestMapping(value = "")
     public String index(Model model){
 
-
+        model.addAttribute("items", itemDao.findAll());
         model.addAttribute("title", "Inventory");
 
         return "inventory/index";
