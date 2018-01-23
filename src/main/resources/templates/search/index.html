@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title th:text="${title}"></title>
+<head th:replace="fragments :: head">
+
+
 </head>
 <body>
 
-<p><a href="/">Home</a></p>
+<a href="/" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> </a>
+
+<h1>Search</h1>
+<p>Please enter all or part of the name for the item your looking for.</p>
 
 <form method="post" style="max-width:700px;" >
     <div class="form-group">
         <label th:for="searchTerm">Enter Search Term</label>
         <input class="form-control" th:name="searchTerm" />
 
-    <input type="submit" value="Search" />
+    <input class="btn btn-info btn-sm" value="Search" type="submit" />
     </div>
 </form>
 <br/>
@@ -35,8 +38,9 @@
         <td th:text="'$'+${item.price}"></td>
 
     </tr>
-    <p th:unless="${results} and ${results.size()}">No Results</p>
+
     <br/>
 </table>
+<p th:text="${noresult}"></p>
 </body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title th:text="${title}"></title>
+<head th:replace="fragments :: head">
+
+
 </head>
 <body>
 <h1>Main Menu</h1>
-<ol>
+<ol class="list">
     <li><a href="/sales">Sales Transactions</a></li>
     <li><a href="/inventory/receiving">Receive Stock</a></li>
     <li><a href="/search">Search Stock</a></li>

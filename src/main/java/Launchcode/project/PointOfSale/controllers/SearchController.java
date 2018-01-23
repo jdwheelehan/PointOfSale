@@ -18,13 +18,13 @@ public class SearchController {
     @Autowired
     ItemDao itemDao;
 
-    private ArrayList<Item> searchResults;
+
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model){
 
-        model.addAttribute("results", searchResults);
+
         model.addAttribute("title", "Search");
 
         return "search/index";
@@ -33,6 +33,7 @@ public class SearchController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String processIndex(@RequestParam String searchTerm, Model model){
 
+         ArrayList<Item> searchResults;
         searchResults = new ArrayList<>();
 
         for (Item i : itemDao.findAll()){
@@ -40,9 +41,16 @@ public class SearchController {
                 searchResults.add(i);
             }
         }
+        if (searchResults.isEmpty()){
+            model.addAttribute("noresult", "No Results");
+            model.addAttribute("results", searchResults);
+            model.addAttribute("title", "Search");
+        }else{
+            model.addAttribute("noresult", "");
+            model.addAttribute("results", searchResults);
+            model.addAttribute("title", "Search");}
 
-
-        return "redirect:";
+        return "search/index";
     }
 
 }

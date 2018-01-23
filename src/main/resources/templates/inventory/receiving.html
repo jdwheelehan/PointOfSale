@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title th:text="${title}"></title>
+<head th:replace="fragments :: head">
+
+
 </head>
 <body>
-<p><a href="/">Home</a></p>
+<a href="/" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> </a>
+
+<h1>Receiving</h1>
+<p>Please enter the SKU and Quantity for each item.</p>
 
 <form method="post" style="max-width:600px;" >
     <div class="form-group">
         <label th:for="sku">Sku</label>
         <input class="form-control" th:name="sku" />
     </div>
-
-    <div class="form-group">
+    <div>
         <label th:for="qty">Quantity</label>
         <input class="form-control" th:name="qty" />
 
     </div>
+    <input class="btn btn-info btn-sm" value="Receive Item" type="submit"/>
 
-    <input type="submit" value="Recieve Item" />
 </form>
 <table class="table">
 
