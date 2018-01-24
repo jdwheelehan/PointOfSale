@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -36,10 +38,13 @@ public class UserController {
 
     @RequestMapping(value = "newhire", method = RequestMethod.POST)
     public String processNewHireForm(@RequestParam String name, @RequestParam String address, @RequestParam String phoneNumber,
-                                     @RequestParam String password, @RequestParam String verifyPassword, Model model){
+                                     @RequestParam String password, @RequestParam String verifyPassword, @RequestParam String clearance, Model model){
         model.addAttribute("title", "New Hire");
         if(password.equals(verifyPassword)){
-            User newUser = new User(name, address, phoneNumber, password.hashCode());
+            Integer finalPass = password.hashCode();
+            Date hireDate = new Date();
+            String finalDate = hireDate.toString();
+            User newUser = new User(name, address, phoneNumber, finalPass, clearance, finalDate);
             userDao.save(newUser);
             return "redirect:";
         }else{

@@ -15,33 +15,33 @@ public class User {
     @GeneratedValue
     private int employeeId;
 
-    @NotNull
-    @Size(min=3, max=15)
+    private String dateOfHire;
+
     private String name;
 
-    @NotNull
-    @Size(min=1, message = "Field must not be empty")
+
     private String address;
 
-    @NotNull
-    @Size(min=1, message = "Field must not be empty")
+
     private String phoneNumber;
 
-    @NotNull
-    @Size(min=1, message = "Field must not be empty")
+
     private Integer password;
 
-    private Date dateOfHire = new Date();
+
+    private String clearanceLevel;
 
     public User() {
     }
 
-    public User(String name, String address, String phoneNumber, Integer password) {
+    public User(String name, String address, String phoneNumber, Integer password, String clearanceLevel, String dateOfHire) {
 
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.clearanceLevel = clearanceLevel;
+        this.dateOfHire = dateOfHire;
 
     }
 
@@ -81,9 +81,15 @@ public class User {
         this.password = password;
     }
 
-    public Date getDateOfHire() {
+    public String getDateOfHire() {
         return dateOfHire;
     }
 
+    public String getClearanceLevel() {
+        return clearanceLevel;
+    }
 
+    public void setClearanceLevel(String clearanceLevel) {
+        this.clearanceLevel = clearanceLevel;
+    }
 }
