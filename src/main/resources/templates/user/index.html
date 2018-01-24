@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+<a href="/" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> </a>
+<h1>Employee List</h1>
+<p th:text="${error}"></p>
+
+<table class="table">
+
+    <tr>
+        <th>Employee ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Date of Hire</th>
+
+    </tr>
+
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.employeeId}"></td>
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.address}"></td>
+        <td th:text="${employee.phoneNumber}"></td>
+        <td th:text="${employee.dateOfHire}"></td>
+
+    </tr>
+    <a href="/user/newhire" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> New Hire</a>
+</table>
+
+</body>
+</html>

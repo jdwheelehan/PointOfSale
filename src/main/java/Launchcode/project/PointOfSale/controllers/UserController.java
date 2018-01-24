@@ -1,6 +1,7 @@
 package Launchcode.project.PointOfSale.controllers;
 
 
+import Launchcode.project.PointOfSale.models.User;
 import Launchcode.project.PointOfSale.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,15 +29,22 @@ public class UserController {
 
 
         model.addAttribute("title", "New Hire");
+        model.addAttribute("error", "");
 
         return "user/newhire";
     }
 
     @RequestMapping(value = "newhire", method = RequestMethod.POST)
     public String processNewHireForm(@RequestParam String name, @RequestParam String address, @RequestParam String phoneNumber,
-                                     @RequestParam String password, Model model){
+                                     @RequestParam String password, @RequestParam String verifyPassword, Model model){
         model.addAttribute("title", "New Hire");
-
-        return "redirect:";
+        if(password.equals(verifyPassword)){
+            User newUser = new User(name, address, phoneNumber, password.hashCode());
+            userDao.save(newUser);
+            return "redirect:";
+        }else{
+        model.addAttribute("title", "New Hire");
+        model.addAttribute("error", "Password and Verify does not match");
+        return "user/newhire";}
     }
 }

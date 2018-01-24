@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class User {
@@ -28,20 +29,20 @@ public class User {
 
     @NotNull
     @Size(min=1, message = "Field must not be empty")
-    private String password;
+    private Integer password;
 
-    private String dateOfHire;
+    private Date dateOfHire = new Date();
 
     public User() {
     }
 
-    public User(int employeeId, String name, String address, String phoneNumber, String password, String dateOfHire) {
-        this.employeeId = employeeId;
+    public User(String name, String address, String phoneNumber, Integer password) {
+
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.dateOfHire = dateOfHire;
+
     }
 
     public int getEmployeeId() {
@@ -72,19 +73,17 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPassword() {
+    public Integer getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Integer password) {
         this.password = password;
     }
 
-    public String getDateOfHire() {
+    public Date getDateOfHire() {
         return dateOfHire;
     }
 
-    public void setDateOfHire(String dateOfHire) {
-        this.dateOfHire = dateOfHire;
-    }
+
 }
