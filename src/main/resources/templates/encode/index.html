@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+<form method="post" style="max-width:600px;" >
+    <div class="form-group">
+        <label th:for="subject">Enter Password</label>
+        <input class="form-control" th:name="subject" />
+
+    </div>
+
+    <input class="btn btn-info btn-sm" value="Convert" type="submit"/>
+</form>
+
+<p th:text="${encode}"></p>
+</body>
+</html>

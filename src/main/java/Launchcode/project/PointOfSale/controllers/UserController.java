@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -41,7 +42,7 @@ public class UserController {
                                      @RequestParam String password, @RequestParam String verifyPassword, @RequestParam String clearance, Model model){
         model.addAttribute("title", "New Hire");
         if(password.equals(verifyPassword)){
-            Integer finalPass = password.hashCode();
+            Integer finalPass = Encode(password);
             Date hireDate = new Date();
             String finalDate = hireDate.toString();
             User newUser = new User(name, address, phoneNumber, finalPass, clearance, finalDate);
@@ -51,5 +52,27 @@ public class UserController {
         model.addAttribute("title", "New Hire");
         model.addAttribute("error", "Password and Verify does not match");
         return "user/newhire";}
+    }
+
+
+    Integer Encode(String subject){
+
+        ArrayList<Character> charList = new ArrayList<>();
+        ArrayList<Integer> numList = new ArrayList<>();
+        for(int i = 0; i<subject.length();i++){
+            charList.add(subject.charAt(i));
+        }
+        for (int i = 0; i <subject.length(); i++){
+            Character singleChar = charList.get(i);
+            numList.add(Character.getNumericValue(singleChar));
+        }
+
+        Integer sum = 0;
+        for(Integer d : numList){
+            sum += d;}
+
+        Integer encodedValue = (sum*2)*(Character.getNumericValue(subject.charAt(3)));
+
+        return encodedValue;
     }
 }
