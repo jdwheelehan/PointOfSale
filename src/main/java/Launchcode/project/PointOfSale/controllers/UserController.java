@@ -42,7 +42,7 @@ public class UserController {
                                      @RequestParam String password, @RequestParam String verifyPassword, @RequestParam String clearance, Model model){
         model.addAttribute("title", "New Hire");
         if(password.equals(verifyPassword)){
-            Integer finalPass = Encode(password);
+            Integer finalPass = password.hashCode();
             Date hireDate = new Date();
             String finalDate = hireDate.toString();
             User newUser = new User(name, address, phoneNumber, finalPass, clearance, finalDate);
@@ -55,24 +55,5 @@ public class UserController {
     }
 
 
-    Integer Encode(String subject){
 
-        ArrayList<Character> charList = new ArrayList<>();
-        ArrayList<Integer> numList = new ArrayList<>();
-        for(int i = 0; i<subject.length();i++){
-            charList.add(subject.charAt(i));
-        }
-        for (int i = 0; i <subject.length(); i++){
-            Character singleChar = charList.get(i);
-            numList.add(Character.getNumericValue(singleChar));
-        }
-
-        Integer sum = 0;
-        for(Integer d : numList){
-            sum += d;}
-
-        Integer encodedValue = (sum*2)*(Character.getNumericValue(subject.charAt(3)));
-
-        return encodedValue;
-    }
 }
