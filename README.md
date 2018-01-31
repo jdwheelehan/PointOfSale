@@ -12,6 +12,7 @@ in the case of multiple locations should all be handled from the store tablets.
 - Java
 - Bootstrap 
 - Hibernate and MySQL
+- To increase as more technologies are used.
 
 ## E.T.A. of completion
 I hope to have a fully functioning version for release in two years. Right now basic sales, receiving, search, and employee
