@@ -20,11 +20,21 @@ public class UserController {
     @Autowired
     UserDao userDao;
     
-    @RequestMapping(value = "")
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("title", "Employee List");
         model.addAttribute("employees", userDao.findAll());
         return "user/index";
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String processRemoveCheeseForm(@RequestParam int[] employeeIds){
+
+        for (int employeeId : employeeIds){
+            userDao.delete(employeeId);
+        }
+
+        return "redirect:";
     }
 
     @RequestMapping(value = "newhire", method = RequestMethod.GET)

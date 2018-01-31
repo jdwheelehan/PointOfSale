@@ -7,7 +7,7 @@
 <a href="/" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> </a>
 <h1>Employee List</h1>
 
-
+<form method="post" style="max-width:600px;" >
 <table class="table">
 
     <tr>
@@ -17,6 +17,7 @@
         <th>Phone Number</th>
         <th>Position</th>
         <th>Date of Hire</th>
+        <th>Terminate Employee</th>
 
     </tr>
 
@@ -27,10 +28,12 @@
         <td th:text="${employee.phoneNumber}"></td>
         <td th:text="${employee.clearanceLevel}"></td>
         <td th:text="${employee.dateOfHire}"></td>
+        <td><input type="checkbox" th:name="employeeIds" th:value="${employee.employeeId}"/></td>
 
     </tr>
     <a href="/user/newhire" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> New Hire</a>
 </table>
-
+    <input class="btn btn-danger btn-lg btn-block" value="Terminate Selected Employee(s)" type="submit"/>
+</form>
 </body>
 </html>
