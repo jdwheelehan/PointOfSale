@@ -22,17 +22,19 @@ public class UserController {
     
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model){
+
         model.addAttribute("title", "Employee List");
         model.addAttribute("employees", userDao.findAll());
         return "user/index";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] employeeIds){
+    public String processRemoveCheeseForm(@RequestParam int[] employeeIds, Model model){
+
 
         for (int employeeId : employeeIds){
-            userDao.delete(employeeId);
-        }
+            userDao.delete(employeeId);}
+
 
         return "redirect:";
     }
