@@ -4,6 +4,8 @@ package Launchcode.project.PointOfSale.controllers;
 import Launchcode.project.PointOfSale.models.Item;
 import Launchcode.project.PointOfSale.models.data.ItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ public class ItemController {
 
     @Autowired
     ItemDao itemDao;
+    private Twitter twitter;
+    private ConnectionRepository connectionRepository;
 
     @RequestMapping(value = "")
     public String index(Model model){
@@ -64,11 +68,15 @@ public class ItemController {
     public String processNewStockForm(@RequestParam Integer sku, @RequestParam String name, @RequestParam Integer qty ,
                                       @RequestParam Double price,  Model model){
 
+        /*if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+            Item newItem = new Item(sku, name, qty, price);
+            itemDao.save(newItem);
+            return "redirect:receiving";
+        }*/
 
-
+        twitter.timelineOperations().updateStatus("This is a coding test to say that "+name+" is in stock.");
         Item newItem = new Item(sku, name, qty, price);
         itemDao.save(newItem);
-
 
 
         return "redirect:receiving";
