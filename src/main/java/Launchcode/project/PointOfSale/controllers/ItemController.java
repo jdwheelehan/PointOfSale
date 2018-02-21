@@ -74,7 +74,7 @@ public class ItemController {
 
         Item newItem = new Item(sku, name, qty, price);
         Twitter twitter = TwitterFactory.getSingleton();
-        twitter.updateStatus("Test to show that "+newItem.getName()+" is now in stock for a fake store.");
+        twitter.updateStatus("Hey guys and gals! "+newItem.getName()+" is now in stock for $"+newItem.getPrice()+"! (Not a real thing)");
         itemDao.save(newItem);
 
 
