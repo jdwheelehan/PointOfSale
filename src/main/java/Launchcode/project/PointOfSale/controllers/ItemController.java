@@ -3,17 +3,21 @@ package Launchcode.project.PointOfSale.controllers;
 
 import Launchcode.project.PointOfSale.models.Item;
 import Launchcode.project.PointOfSale.models.data.ItemDao;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.twitter.api.Twitter;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("inventory")
@@ -21,8 +25,7 @@ public class ItemController {
 
     @Autowired
     ItemDao itemDao;
-    private Twitter twitter;
-    private ConnectionRepository connectionRepository;
+
 
     @RequestMapping(value = "")
     public String index(Model model){
@@ -66,16 +69,12 @@ public class ItemController {
 
     @RequestMapping(value = "addstock", method = RequestMethod.POST)
     public String processNewStockForm(@RequestParam Integer sku, @RequestParam String name, @RequestParam Integer qty ,
-                                      @RequestParam Double price,  Model model){
+                                      @RequestParam Double price,  Model model) throws TwitterException {
 
-        /*if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-            Item newItem = new Item(sku, name, qty, price);
-            itemDao.save(newItem);
-            return "redirect:receiving";
-        }*/
 
-        twitter.timelineOperations().updateStatus("This is a coding test to say that "+name+" is in stock.");
         Item newItem = new Item(sku, name, qty, price);
+        Twitter twitter = TwitterFactory.getSingleton();
+        twitter.updateStatus("Test to show that "+newItem.getName()+" is now in stock for a fake store.");
         itemDao.save(newItem);
 
 
