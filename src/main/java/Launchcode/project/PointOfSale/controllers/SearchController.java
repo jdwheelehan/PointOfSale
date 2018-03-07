@@ -7,6 +7,7 @@ import Launchcode.project.PointOfSale.models.data.ItemDao;
 import com.nexmo.client.NexmoClient;
 import com.nexmo.client.auth.AuthMethod;
 import com.nexmo.client.auth.TokenAuthMethod;
+import com.nexmo.client.sms.SmsSubmissionResult;
 import com.nexmo.client.sms.messages.TextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,7 @@ public class SearchController {
             }
         }
         if (searchResults.isEmpty()){
-            return "search/noresult";
+            return "redirect:search/noresult";
         }else{
 
             model.addAttribute("results", searchResults);
@@ -66,15 +67,20 @@ public class SearchController {
         return "search/noresult";}
 
     @RequestMapping(value = "noresult", method = RequestMethod.POST)
-    public String processNoResultForm(@RequestParam String name, @RequestParam String game, @RequestParam String phoneNumber){
+    public String processNoResultForm(@RequestParam String name, @RequestParam String game, @RequestParam String phoneNumber
+                                      )throws Exception{
 
-        Customer newCustomer = new Customer(name, game, phoneNumber);
+        Customer newCustomer = new Customer(name, game, "1"+phoneNumber);
         customerDao.save(newCustomer);
-        AuthMethod auth = new TokenAuthMethod(API_KEY, API_SECRET);
+        AuthMethod auth = new TokenAuthMethod("8281c4ec","6DSV3XyFUNxSOuDm");
         NexmoClient client = new NexmoClient(auth);
 
         TextMessage message = new TextMessage("12028525650", newCustomer.getCustomernumber(), "We will notify you upon arrival.");
-        return "redirect:search";
+        SmsSubmissionResult[] responses = client.getSmsClient().submitMessage(message);
+        for (SmsSubmissionResult response : responses) {
+            System.out.println(response);
+        }
+        return "redirect:";
     }
 
 }
